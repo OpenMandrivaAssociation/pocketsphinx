@@ -7,7 +7,7 @@ Name: %{name}
 Version: 0.6.1
 Release: %mkrel 1
 Summary: Real-time speech recognition
-Group: Applications/Multimedia
+Group: Sound
 License: BSD and LGPLv2+
 URL: http://www.pocketsphinx.org/
 Source: http://downloads.sourceforge.net/cmusphinx/%{name}-%{version}.tar.gz
@@ -24,7 +24,7 @@ enough to run on handheld and embedded devices.
 
 %package -n %{devel}
 Summary: Header files for developing with pocketsphinx
-Group: Applications/Multimedia
+Group: Development/C
 Requires: %{name}-libs = %{version}-%{release}, pkgconfig
 Requires: sphinxbase-devel
 Provides: %{name}-devel = %{version}-%{release}
@@ -34,7 +34,7 @@ Header files for developing with pocketsphinx.
 
 %package -n %{libs}
 Summary: Shared libraries for pocketsphinx executables
-Group: Applications/Multimedia
+Group: System/Libraries
 Provides: %{name}-libs = %{version}-%{release}
 
 %description -n %{libs}
@@ -42,7 +42,7 @@ Shared libraries for pocketsphinx executables.
 
 %package -n %{python}
 Summary: Python interface to pocketsphinx
-Group: Applications/Multimedia
+Group: Development/Python
 Requires: %{name}-libs = %{version}-%{release}, sphinxbase-python
 Provides: %{name}-python = %{version}-%{release}
 
