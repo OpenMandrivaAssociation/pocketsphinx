@@ -50,6 +50,14 @@ Provides: %{name}-python = %{version}-%{release}
 %description -n %{python}
 Python interface to pocketsphinx.
 
+%package gstreamer
+Summary: Gstreamer plugin for pocketsphinx
+Group: Sound
+Requires: %{name}-libs = %{version}-%{release}, sphinxbase-python
+
+%description gstreamer
+Gstreamer plugin for pocketsphinx.
+
 %prep
 %setup -q
 
@@ -89,6 +97,7 @@ rm -rf %{buildroot}
 %{_libdir}/libpocketsphinx.so
 %{_libdir}/libpocketsphinx.la
 %{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/gstreamer-0.10/libgstpocketsphinx.la
 
 %files -n %{libs}
 %defattr(-,root,root,-)
@@ -96,4 +105,8 @@ rm -rf %{buildroot}
 
 %files -n %{python}
 %defattr(-,root,root,-)
-%{_libdir}/python2.6/site-packages/*
+%py_platsitedir/*
+
+%files gstreamer
+%defattr(-,root,root,-)
+%{_libdir}/gstreamer-0.10/libgstpocketsphinx.so
