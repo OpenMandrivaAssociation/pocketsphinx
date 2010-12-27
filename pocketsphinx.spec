@@ -54,6 +54,7 @@ Python interface to pocketsphinx.
 Summary: Gstreamer plugin for pocketsphinx
 Group: Sound
 Requires: %{name}-libs = %{version}-%{release}, sphinxbase-python
+BuildRequires: libgstreamer-devel
 
 %description gstreamer
 Gstreamer plugin for pocketsphinx.
