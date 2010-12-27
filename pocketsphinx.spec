@@ -14,7 +14,7 @@ Source: http://downloads.sourceforge.net/cmusphinx/%{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 BuildRequires: pkgconfig, python-setuptools, sphinxbase-devel
 Requires: sphinxbase
-BuildRequires: sphinx-base
+BuildRequires: sphinxbase sphinxbase-devel
 
 
 %description
