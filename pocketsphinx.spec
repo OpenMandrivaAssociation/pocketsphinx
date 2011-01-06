@@ -44,7 +44,7 @@ Shared libraries for pocketsphinx executables.
 %package -n %{python}
 Summary: Python interface to pocketsphinx
 Group: Development/Python
-Requires: %{name}-libs = %{version}-%{release}, sphinxbase-python
+Requires: %{name}-libs = %{version}-%{release}
 Provides: %{name}-python = %{version}-%{release}
 
 %description -n %{python}
@@ -53,8 +53,8 @@ Python interface to pocketsphinx.
 %package gstreamer
 Summary: Gstreamer plugin for pocketsphinx
 Group: Sound
-Requires: %{name}-libs = %{version}-%{release}, sphinxbase-python
-BuildRequires: libgstreamer-devel
+Requires: %{name}-libs = %{version}-%{release}
+BuildRequires: libgstreamer-devel, libgstreamer-plugins-base-devel
 
 %description gstreamer
 Gstreamer plugin for pocketsphinx.
