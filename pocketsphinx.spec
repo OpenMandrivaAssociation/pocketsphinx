@@ -46,7 +46,7 @@ Shared libraries for pocketsphinx executables.
 Summary: Python interface to pocketsphinx
 Group: Development/Python
 Requires: lib%{name} = %{version}-%{release}
-Provides: %{name}-python = %{version}-%{release}
+Provides: lib%{name}-python = %{version}-%{release}
 
 %description -n %{python}
 Python interface to pocketsphinx.
