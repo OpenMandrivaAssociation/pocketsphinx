@@ -5,7 +5,7 @@
 
 Name: %{name}
 Version: 0.6.1
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Real-time speech recognition
 Group: Sound
 License: BSD and LGPLv2+
@@ -26,7 +26,7 @@ enough to run on handheld and embedded devices.
 %package -n %{devel}
 Summary: Header files for developing with pocketsphinx
 Group: Development/C
-Requires: %{name}-libs = %{version}-%{release}, pkgconfig
+Requires: lib%{name} = %{version}-%{release}, pkgconfig
 Requires: sphinxbase-devel
 Provides: %{name}-devel = %{version}-%{release}
 
@@ -37,6 +37,7 @@ Header files for developing with pocketsphinx.
 Summary: Shared libraries for pocketsphinx executables
 Group: System/Libraries
 Provides: %{name}-libs = %{version}-%{release}
+Provides: lib%{name} = %{version}-%{release}
 
 %description -n %{libs}
 Shared libraries for pocketsphinx executables.
@@ -44,7 +45,7 @@ Shared libraries for pocketsphinx executables.
 %package -n %{python}
 Summary: Python interface to pocketsphinx
 Group: Development/Python
-Requires: %{name}-libs = %{version}-%{release}
+Requires: lib%{name} = %{version}-%{release}
 Provides: %{name}-python = %{version}-%{release}
 
 %description -n %{python}
@@ -53,8 +54,9 @@ Python interface to pocketsphinx.
 %package gstreamer
 Summary: Gstreamer plugin for pocketsphinx
 Group: Sound
-Requires: %{name}-libs = %{version}-%{release}
+Requires: lib%{name} = %{version}-%{release}
 BuildRequires: libgstreamer-devel, libgstreamer-plugins-base-devel
+Provides: %{name}-gstreamer = %{version}-%{release}
 
 %description gstreamer
 Gstreamer plugin for pocketsphinx.
