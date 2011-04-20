@@ -4,8 +4,8 @@
 %define python %mklibname %{name}-python
 
 Name: %{name}
-Version: 0.6.1
-Release: %mkrel 2
+Version: 0.7
+Release: %mkrel 0
 Summary: Real-time speech recognition
 Group: Sound
 License: BSD and LGPLv2+
