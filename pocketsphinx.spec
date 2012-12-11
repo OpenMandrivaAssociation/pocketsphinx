@@ -1,21 +1,21 @@
-%define name pocketsphinx
-%define devel %mklibname %{name} -d
-%define libs %mklibname %{name}
-%define python %mklibname %{name}-python
+%define name	pocketsphinx
 
-Name: %{name}
-Version: 0.7
-Release: %mkrel 0
-Summary: Real-time speech recognition
-Group: Sound
-License: BSD and LGPLv2+
-URL: http://www.pocketsphinx.org/
-Source: http://downloads.sourceforge.net/cmusphinx/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
-BuildRequires: pkgconfig, python-setuptools, sphinxbase-devel
-Requires: sphinxbase
-BuildRequires: sphinxbase sphinxbase-devel
+%define major	1
+%define devname	%mklibname %{name} -d
+%define libname	%mklibname %{name} %{major}
 
+%define gstname	gstreamer0.10-%{name}
+
+Name:		%{name}
+Version:	0.7
+Release:	%mkrel 1
+Summary:	Real-time speech recognition
+Group:		Sound
+License:	BSD and LGPLv2+
+URL:		http://www.pocketsphinx.org/
+Source0:	http://downloads.sourceforge.net/cmusphinx/%{name}-%{version}.tar.gz
+BuildRequires:	python-setuptools
+BuildRequires:	sphinxbase-devel
 
 %description
 PocketSphinx is a version of the open-source Sphinx-II speech recognition
@@ -23,93 +23,77 @@ system which is able to recognize speech in real-time.  While it may be
 somewhat less accurate than the offline speech recognizers, it is lightweight
 enough to run on handheld and embedded devices.
 
-%package -n %{devel}
-Summary: Header files for developing with pocketsphinx
-Group: Development/C
-Requires: lib%{name} = %{version}-%{release}, pkgconfig
-Requires: sphinxbase-devel
-Provides: %{name}-devel = %{version}-%{release}
+%package -n %{devname}
+Summary:	Header files for developing with pocketsphinx
+Group:		Development/C
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{devel}
+%description -n %{devname}
 Header files for developing with pocketsphinx.
 
-%package -n %{libs}
-Summary: Shared libraries for pocketsphinx executables
-Group: System/Libraries
-Provides: %{name}-libs = %{version}-%{release}
-Provides: lib%{name} = %{version}-%{release}
+%package -n %{libname}
+Summary:	Shared libraries for pocketsphinx executables
+Group:		System/Libraries
 
-%description -n %{libs}
+%description -n %{libname}
 Shared libraries for pocketsphinx executables.
 
-%package -n %{python}
-Summary: Python interface to pocketsphinx
-Group: Development/Python
-Requires: lib%{name} = %{version}-%{release}
-Provides: lib%{name}-python = %{version}-%{release}
+%package -n python-%{name}
+Summary:	Python interface to pocketsphinx
+Group:		Development/Python
+Requires:	%{name} = %{version}-%{release}
 
-%description -n %{python}
+%description -n python-%{name}
 Python interface to pocketsphinx.
 
-%package gstreamer
-Summary: Gstreamer plugin for pocketsphinx
-Group: Sound
-Requires: lib%{name} = %{version}-%{release}
-BuildRequires: libgstreamer-devel, libgstreamer-plugins-base-devel
-Provides: %{name}-gstreamer = %{version}-%{release}
+%package -n %{gstname}
+Summary:	Gstreamer plugin for pocketsphinx
+Group:		Sound
+BuildRequires:	libgstreamer-devel
+BuildRequires:	libgstreamer-plugins-base-devel
+Requires:	%{name} = %{version}-%{release}
 
-%description gstreamer
+%description -n %{gstname}
 Gstreamer plugin for pocketsphinx.
 
 %prep
 %setup -q
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-%configure --disable-dependency-tracking --disable-static
-%make %{?_smp_mflags}
+%configure2_5x \
+	--disable-static
+%make LIBS="-lsphinxbase -lsphinxad -lm"
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}%{python_sitearch}
-%makeinstall
+%makeinstall_std
+
 mkdir -p %{buildroot}%{_mandir}/man1
-cp -p doc/*.1 %{buildroot}%{_mandir}/man1
+install -pm644 doc/*.1 %{buildroot}%{_mandir}/man1/
 
-%clean
-rm -rf %{buildroot}
+# we don't want these
+find %{buildroot} -name "*.la" -exec rm -rf {} \;
 
-%if %{mdkversion} <= 200900
-%post -n %{libs} -p /sbin/ldconfig
-%postun -n %{libs} -p /sbin/ldconfig
-%endif
+%check
+%make check
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING NEWS README
 %{_bindir}/*
-%{_datadir}/pocketsphinx
+%{_datadir}/%{name}
 %{_mandir}/man1/*
 
-%files -n %{devel}
-%defattr(-,root,root,-)
+%files -n %{devname}
 %{_includedir}/%{name}
 %{_libdir}/libpocketsphinx.so
-%{_libdir}/libpocketsphinx.la
 %{_libdir}/pkgconfig/%{name}.pc
-%{_libdir}/gstreamer-0.10/libgstpocketsphinx.la
 
-%files -n %{libs}
-%defattr(-,root,root,-)
-%{_libdir}/libpocketsphinx.so.*
+%files -n %{libname}
+%{_libdir}/lib%{name}.so.%{major}*
 
-%files -n %{python}
-%defattr(-,root,root,-)
-%py_platsitedir/*
+%files -n python-%{name}
+%{py_platsitedir}/*
 
-%files gstreamer
-%defattr(-,root,root,-)
-%{_libdir}/gstreamer-0.10/libgstpocketsphinx.so
+%files -n %{gstname}
+%{_libdir}/gstreamer-0.10/libgst%{name}.so
