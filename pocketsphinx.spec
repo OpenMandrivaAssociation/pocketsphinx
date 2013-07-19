@@ -7,13 +7,13 @@
 %define gstname	gstreamer0.10-%{name}
 
 Name:		%{name}
-Version:	0.7
-Release:	%mkrel 1
+Version:	0.8
+Release:	1
 Summary:	Real-time speech recognition
 Group:		Sound
 License:	BSD and LGPLv2+
 URL:		http://www.pocketsphinx.org/
-Source0:	http://downloads.sourceforge.net/cmusphinx/%{name}-%{version}.tar.gz
+Source0:	https://sourceforge.net/projects/cmusphinx/files/pocketsphinx/0.8/%{name}-%{version}.tar.gz
 BuildRequires:	python-setuptools
 BuildRequires:	sphinxbase-devel
 
@@ -97,3 +97,4 @@ find %{buildroot} -name "*.la" -exec rm -rf {} \;
 
 %files -n %{gstname}
 %{_libdir}/gstreamer-0.10/libgst%{name}.so
+
