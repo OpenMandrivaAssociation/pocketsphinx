@@ -66,7 +66,7 @@ Gstreamer plugin for pocketsphinx.
 %make LIBS="-lsphinxbase -lsphinxad -lm"
 
 %install
-mkdir -p %{buildroot}%{python_sitearch}
+mkdir -p %{buildroot}%{py_platsitedir}
 %makeinstall_std
 
 mkdir -p %{buildroot}%{_mandir}/man1
