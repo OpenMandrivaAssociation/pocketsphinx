@@ -1,2 +1,4 @@
+removed_sources:
+  pocketsphinx-0.7.tar.gz: 4140245211239d8922543b28007fc5afd77258fe
 sources:
-  "pocketsphinx-0.7.tar.gz": 4140245211239d8922543b28007fc5afd77258fe
+  pocketsphinx-0.8.tar.gz: d9efdd0baddd2e47c2ba559caaca62ffa0c0eede
