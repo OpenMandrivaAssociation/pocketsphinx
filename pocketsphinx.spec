@@ -6,7 +6,7 @@
 
 Name:		pocketsphinx
 Version:	0.8
-Release:	%mkrel 1
+Release:	2
 Summary:	Real-time speech recognition
 Group:		Sound
 License:	BSD and LGPLv2+
