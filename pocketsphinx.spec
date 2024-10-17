@@ -10,7 +10,7 @@ Release:	2
 Summary:	Real-time speech recognition
 Group:		Sound
 License:	BSD and LGPLv2+
-URL:		http://cmusphinx.sourceforge.net/
+URL:		https://cmusphinx.sourceforge.net/
 Source0:	http://sourceforge.net/projects/cmusphinx/files/pocketsphinx/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	python-setuptools
 BuildRequires:	pkgconfig(sndfile)
