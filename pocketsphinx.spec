@@ -12,6 +12,11 @@ Group:		Sound
 License:	BSD and LGPLv2+
 URL:		https://cmusphinx.sourceforge.net/
 Source0:	http://sourceforge.net/projects/cmusphinx/files/pocketsphinx/%{version}/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	python-setuptools
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(sphinxbase)
